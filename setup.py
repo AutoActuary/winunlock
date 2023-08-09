@@ -14,7 +14,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: MIT License",  # Update with the license you've chosen.
+        "License :: OSI Approved :: MIT License",  # Update with the license you've chosen.
         "Operating System :: Microsoft :: Windows",
     ],
     python_requires=">=3.6",  # Adjusted to 3.6 for type hinting, but change as needed.
