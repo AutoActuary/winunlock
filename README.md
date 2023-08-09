@@ -57,7 +57,7 @@ Contributions to improve `winunlock` or expand its functionalities are welcome. 
 
 ### License
 
-[Specify your license here, e.g., MIT, Apache, etc.]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 * * *
 
