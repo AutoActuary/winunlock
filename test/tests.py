@@ -15,6 +15,7 @@ import win32process
 import win32com
 import ctypes
 import multiprocessing
+
 with locate.prepend_sys_path(".."):
     from winunlock import open as winunlock_open
     from winunlock import monkeypatch_open
@@ -211,6 +212,7 @@ class TestOpenLockedWithLock(unittest.TestCase):
         ) as f:
             f.read()
     """
+
 
 class TestOpenLocked(unittest.TestCase):
     def random_string(self, length):
