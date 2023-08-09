@@ -7,5 +7,5 @@ _IOType = Union[
     io.BufferedRandom,
     io.BufferedWriter,
     io.BufferedReader,
-    io.FileIO
+    io.FileIO,
 ]

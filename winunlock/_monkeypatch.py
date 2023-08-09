@@ -13,11 +13,11 @@ def _open(
     file: Union[PathLike[str], str],
     mode: str = "r",
     buffering: int = -1,
-    encoding: str | None = None,
-    errors: str | None = None,
-    newline: str | None = None,
+    encoding: Union[str, None] = None,
+    errors: Union[str, None] = None,
+    newline: Union[str, None] = None,
     closefd: bool = True,
-    opener: Callable[[str, int], int] | None = None,
+    opener: Union[Callable[[str, int], int], None] = None,
 ) -> _IOType:
     """
     A helper function that tries Python's built-in open function first and
