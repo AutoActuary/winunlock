@@ -162,3 +162,4 @@ pytest_cache/
 # Other tools
 *.sass-cache
 *.scss-cache
+winunlock/version.py
