@@ -77,7 +77,8 @@ def open(
         "ab": OPEN_ALWAYS,  # for 'append' binary mode
     }
 
-    CreateFileW = ctypes.windll.kernel32.CreateFileW
+    # Ignore to avoid mypy error on Linux machines
+    CreateFileW = ctypes.windll.kernel32.CreateFileW  # type: ignore
 
     access_mode = access_flags.get(mode)
     if access_mode is None:
@@ -111,8 +112,8 @@ def open(
     ERROR_DIRECTORY = 267
 
     if hfile == INVALID_HANDLE_VALUE:
-        # Get the last error code
-        error_code = ctypes.GetLastError()
+        # Ignore to avoid mypy error on Linux machines
+        error_code = ctypes.GetLastError()  # type: ignore
 
         if error_code == ERROR_FILE_NOT_FOUND:
             raise FileNotFoundError(f"No such file or directory: '{filename}'")
@@ -127,21 +128,25 @@ def open(
         elif error_code == UNKNOWN_ERROR:
             raise OSError("Unknown error")
         else:
-            raise ctypes.WinError()
+            # Ignore to avoid mypy error on Linux machines
+            raise ctypes.WinError()  # type: ignore
 
     try:
         # for 'append' mode, you'd also need to move the file pointer to the end
         if mode in {"a", "ab"}:
-            ctypes.windll.kernel32.SetFilePointer(hfile, 0, None, FILE_END)
+            # Ignore to avoid mypy error on Linux machines
+            ctypes.windll.kernel32.SetFilePointer(hfile, 0, None, FILE_END)  # type: ignore
 
         # Convert the Windows handle into a C runtime file descriptor
-        fd = msvcrt.open_osfhandle(hfile, os.O_BINARY if "b" in mode else os.O_TEXT)
+        # Ignore to avoid mypy error on Linux machines
+        fd = msvcrt.open_osfhandle(hfile, os.O_BINARY if "b" in mode else os.O_TEXT)  # type: ignore
 
         # Create a Python file object from the file descriptor
         file = os.fdopen(fd, mode, *args, **kwargs)
     except:
         # Close the handle if an exception occurred
-        ctypes.windll.kernel32.CloseHandle(hfile)
+        # Ignore to avoid mypy error on Linux machines
+        ctypes.windll.kernel32.CloseHandle(hfile)  # type: ignore
         raise
 
     # Monkeypatch the file object to include hfile as a closure and
@@ -150,7 +155,8 @@ def open(
 
     def __exit__(self: IO[Any], *args: Any) -> None:
         original_exit(*args)
-        ctypes.windll.kernel32.CloseHandle(hfile)
+        # Ignore to avoid mypy error on Linux machines
+        ctypes.windll.kernel32.CloseHandle(hfile)  # type: ignore
 
     setattr(
         file,
