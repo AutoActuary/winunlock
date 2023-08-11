@@ -82,7 +82,10 @@ def monkeypatch_open() -> Iterator[None]:
         The built-in open function will be restored upon exiting the context.
 
     """
-    save_open = builtins.open
+    save_builtins_open = builtins.open
+    save_io_open = io.open
     builtins.open = _open  # type: ignore
+    io.open = _open  # type: ignore
     yield
-    builtins.open = save_open
+    builtins.open = save_builtins_open
+    io.open = save_io_open
