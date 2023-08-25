@@ -5,7 +5,6 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="winunlock",
-    version="0.1.0",  # Assuming this is version 0.1.0. Update as needed.
     author="Auto Actuary",  # Update with your name or organization name.
     description="A Python module that provides functionality for opening certain types of locked files in Windows.",
     long_description=long_description,
